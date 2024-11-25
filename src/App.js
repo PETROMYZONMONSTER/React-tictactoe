@@ -6,7 +6,6 @@ export default function TicTacToe() {
   const [cells, setCells] = useState(Array(9).fill("·"));
   const [winner, setWinner] = useState();
   const [isDraw, setIsDraw] = useState(false);
-  const [count, setCount] = useState(0);
 
   const checkWinner = (arr) => {
     let combos = {
@@ -74,6 +73,7 @@ export default function TicTacToe() {
   const handleReset = () => {
     setWinner(null);
     setIsDraw(false);
+    setTurn("X");
     setCells(Array(9).fill("·"));
   };
 
@@ -88,11 +88,11 @@ export default function TicTacToe() {
       <div className="general_container">
         <div className="game_container">
           <div className="division_container">
-            <div className="player_container">
+            <div className="player_container_1">
               <h3>Player 1</h3>
-              <div className={`winner ${winner || isDraw ? "show" : null}`}>
-                {winner ? `${winner} wins!` : isDraw ? "It's a draw!" : null}
-              </div>
+            </div>
+            <div className={`winner ${winner || isDraw ? "show" : null}`}>
+              {winner === "X" ? `${winner} wins!` : isDraw ? "A draw!" : null}
             </div>
           </div>
           <div className="division_container">
@@ -117,20 +117,22 @@ export default function TicTacToe() {
               </tbody>
             </table>
             <button className="basic_button" onClick={toggleTheme}>
-              Theme
+              Change theme
             </button>
           </div>
-          <div className="player_container">
-            <h3>Player 2</h3>
+          <div className="division_container">
+            <div className="player_container_2">
+              <h3>Player 2</h3>
+            </div>
             <div className={`winner ${winner || isDraw ? "show" : null}`}>
-              {winner ? `${winner} wins!` : isDraw ? "It's a draw!" : null}
+              {winner === "O" ? `${winner} wins!` : isDraw ? "A draw!" : null}
             </div>
           </div>
         </div>
-        <button className="basic_button" onClick={handleReset}>
-          Reset
-        </button>
-      </div>
-  );
-}
+          <button className="basic_button" onClick={handleReset}>
+            Reset game
+          </button>
+        </div>
+        );
+        }
 
